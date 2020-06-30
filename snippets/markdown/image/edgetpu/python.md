@@ -40,7 +40,7 @@ def classifyImage(image_path, engine):
     image.resize((224, 224))
 
     # Classify and ouptut inference
-    classifications = engine.ClassifyWithImage(image)
+    classifications = engine.classify_with_image(image)
     return classifications
 
 def main():
@@ -64,6 +64,8 @@ def main():
 
         # Classify and display image
         results = classifyImage(pil_im, engine)
+        label = labels [results[0][0]]
+        cv2.putText(cv2_im, label, (10, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
         cv2.imshow('frame', cv2_im)
         print(results)
         if cv2.waitKey(1) & 0xFF == ord('q'):
